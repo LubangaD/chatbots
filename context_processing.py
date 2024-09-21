@@ -1,6 +1,8 @@
 
+from dotenv import load_dotenv
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+import os
 
 def should_enrich_context(user_input):
     """
@@ -17,8 +19,8 @@ def search_web(query):
     """
     Searches the web for additional context using Google Custom Search API.
     """
-    api_key = "AIzaSyAjCjAfMI4CK5no_P6xF7GPWXVwjTmbGpA"  # Replace with your API key
-    cx = "1445f2406662c475c"  # Replace with your Custom Search Engine ID
+    api_key = os.getenv("GOOGLE_API_KEY")
+    cx = os.getenv("GOOGLE_CSE_ID")
 
     try:
         service = build("customsearch", "v1", developerKey=api_key)
